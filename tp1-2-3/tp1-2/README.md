@@ -8,8 +8,8 @@ SQL
 Vous pouvez vérifier dans le plugin Docker de Vscode sur la gauche dans la liste des conteneurs et y retrouver un conteneur `mysql` et un conteneur `jupyter` actifs (avec le triangle vert à côté). Une fois votre nouveau conteneur démarré, nous allons nous connect au client mysql natif présent dans le conteneur. Ce dernier est en ligne de commandes.
 
 ```bash
-# Executer le client local, avec comme mot de passe rootpwd. Remplacez le nom du conteneur si nécessaire
-docker exec -it tp1-some-mysql-1 mysql -u root -p
+# Executer le client local, avec comme mot de passe `root`. Remplacez le nom du conteneur si nécessaire
+docker exec -it tp1-2-3-some-mysql-1 mysql -u root -p
 ```
 
 Normalement vous devriez avoir accès au client, avec une ligne indiquant `mysql>`. Nous allons tester quelques commandes, pour vérifier si tout va bien.
@@ -67,19 +67,19 @@ Lancez un nouveau terminal dans le dossier contenant les fichiers SQL, puis, sel
 
 Windows.
 ```console
-docker cp ..\sakila\sakila-data.sql tp1-some-mysql-1:/tmp/
-docker cp ..\sakila\sakila-schema.sql tp1-some-mysql-1:/tmp/
+docker cp sakila\sakila-data.sql tp1-some-mysql-1:/tmp/
+docker cp sakila\sakila-schema.sql tp1-some-mysql-1:/tmp/
 ```
 
 Linux/Mac
 ```bash
-docker cp ../sakila/sakila-data.sql tp1-some-mysql-1:/tmp/
-docker cp ../sakila/sakila-schema.sql tp1-some-mysql-1:/tmp/
+docker cp sakila/sakila-data.sql tp1-some-mysql-1:/tmp/
+docker cp sakila/sakila-schema.sql tp1-some-mysql-1:/tmp/
 ```
 
 Vous pouvez ensuite réutiliser le terminal contenant le client MySQL. Si vous l'avez fermé ou ne le retrouvez pas, vous pouvez en ouvrir un nouveau facilement : 
 ```bash
-docker exec -it tp1-some-mysql-1 mysql -u root -p
+docker exec -it tp1-2-3-some-mysql-1 mysql -u root -p
 ```
 
 Lancez les commandes suivant pour charger la structures des tables et les données :
