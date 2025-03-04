@@ -1,0 +1,94 @@
+services:
+  spark:
+    image: docker.io/bitnami/spark:3.5
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - SPARK_USER=spark
+    ports:
+      - '8080:8080'
+      - '7077:7077'
+      - '18888:8888'
+  spark-worker:
+    image: docker.io/bitnami/spark:3.5
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark:7077
+      - SPARK_WORKER_MEMORY=1G # can be changed
+      - SPARK_WORKER_CORES=1 # can be changed
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - SPARK_USER=spark
+    ports:
+      - '8081:8081'
+    volumes:
+      - ./graphframes_cps:/opt/bitnami/spark/work/graphframes_cps
+  minio:
+    image: minio/minio
+    container_name: minio
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: password
+    command: server /data --console-address ":9001"
+    ports:
+      - "19000:9000"
+      - "19001:9001"
+  zookeeper1:
+    image: bitnami/zookeeper:latest
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+
+  neo4j:
+    image: neo4j:5.25.1
+    #restart: always
+    container_name: neo4j
+    volumes:
+      - neodata:/var/lib/neo4j/data
+      - neoimport:/var/lib/neo4j/import
+      - neoplugins:/var/lib/neo4j/plugins
+    ports:
+      - "0.0.0.0:7474:7474"
+      - "0.0.0.0:7687:7687"
+    environment:
+      NEO4J_dbms_security_procedures_unrestricted: "example.*, apoc.*"
+      NEO4J_dbms_security_procedures_allowlist: "example.*, apoc.*"
+      NEO4J_dbms_memory_pagecache_size: "200M"
+      NEO4J_dbms_memory_heap_initial__size: "512M"
+      NEO4J_dbms_memory_heap_max__size: "512M"
+      NEO4J_AUTH: neo4j/neo4jtp9
+      NEO4J_dbms_security_auth__minimum__password__length: 7
+      NEO4J_PLUGINS: \[\"apoc\", \"graph-data-science\"]\
+      NEO4J_apoc_export_file_enabled: true
+      NEO4J_apoc_import_file_enabled: true
+      NEO4J_apoc_import_file_use__neo4j__config: true
+
+  notebook:
+    image: jupyter-tp9
+    build:
+      context: .
+      dockerfile: Dockerfile-jupyter
+    container_name: jupyter
+    volumes:
+      - ./:/home/jovyan/work
+    ports:
+    - "8888:8888"
+    - "4040:4040"
+    environment:
+      JUPYTER_ENABLE_LAB: yes
+    command: start-notebook.py --NotebookApp.token=''
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
+volumes:
+  neodata:
+  neoimport:
+  neoplugins:
+
+
+networks:
+  default:
+    name : tp9
