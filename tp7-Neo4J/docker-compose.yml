@@ -30,7 +30,7 @@ services:
       - ./graphframes_cps:/opt/bitnami/spark/work/graphframes_cps
   minio:
     image: minio/minio
-    container_name: minio
+    container_name: miniobis
     environment:
       MINIO_ROOT_USER: root
       MINIO_ROOT_PASSWORD: password
