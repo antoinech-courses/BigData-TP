@@ -9,9 +9,9 @@ Choisissez parmi les sujets suivants :
 - Mobilité : [API temps réel Naolib](https://data.nantesmetropole.fr/explore/dataset/244400404_api-temps-reel-tan/information/)
 - Mobilité : [Plateform Régionale d'information pour la mobilité (Ile de France) ](https://prim.iledefrance-mobilites.fr/fr)
 - Aviation : [OpenSkyNetwork API](https://openskynetwork.github.io/opensky-api/index.html)
-- Réseaux sociaux : [Bluesky]([https://docs.bsky.app/docs/category/http-reference])
 - Transports : [SNCF API Open-Data](https://numerique.sncf.com/startup/api/)
 - Transports : [Here maps](https://developer.here.com/develop/rest-apis)
+- DIFFICILE : Réseaux sociaux : [Bluesky]([https://docs.bsky.app/docs/category/http-reference])
 
 ### Autres ?
 
@@ -25,26 +25,23 @@ Attention aux limites d'utilisation (rate limit) : vérifiez bien celles de l'AP
 
 Les groupes devront être compter 4 élèves (sauf si nombre impaire dans la promo). Pour ceux qui sont en difficulté avec les installations (problème de mémoire ou de puissance de leur machine), veillez bien à vous inclure dans un groupe n'ayant pas de soucis à ce niveau.
 
-Vous devrez, à l'aide de Minio et Apache Spark pour l'une des APIs :
-- effectuer des requêtes en mode streaming
+Vous devrez, à l'aide de Kafka (idéalement, Minio à défaut) et Apache Spark pour l'une des APIs mentionnées plus haut :
 - effectuer une requête en mode batch et présenter les résultats à l'aide de Pandas et Seaborn
-
-Optionnel au choix :
-- Utiliser Kafka pour faire du streaming sur la même ou une autre API (des slides et un TP sont disponibles sur Moodle et le repo de tp pour vous aider, il existe aussi beaucoup de ressources en ligne)
-- Relier vos requêtes de streaming à un dashboard
-- Mixer l'utilisation de plusieurs APIs pour obtenir des résultats plus intéressants
-- Utiliser l'une des bases NoSQL présentée en tuto ou Neo4J au lieu de Minio (attention à choir une BD adaptée aux requêtes à effectuer et à la nature des données)
+- effectuer des requêtes en mode streaming avec fenêtres temporelles
 
 Pour Minio, comme pour Kafka, une première étape sera d'insérer les données. Vous pouvez prendre comme modèle les scripts des TPs respectifs.
-Le dashboard pourra s'alimenter auprès de n'importe quelle source.
 
 Les requêtes développées devront avoir du sens en regard des données : gardez à l'esprit que vous devrez préciser une synthèse des résultats obtenus et expliquer leur signification. Il faut donner de la VALEUR aux données.
 
+Optionnel au choix :
+- Mixer l'utilisation de plusieurs APIs pour obtenir des résultats plus intéressants
+- Relier vos requêtes de streaming à un dashboard (Le dashboard pourra s'alimenter auprès de n'importe quelle source)
+- Utiliser l'une des bases NoSQL présentée en tuto ou Neo4J au lieu de Minio (attention à choir une BD adaptée aux requêtes à effectuer et à la nature des données)
+
 ## Critères d'évaluation approximatifs
 
-Collecte des données (script d'initialisation dans Minio) : 20 %
+Collecte des données (script d'initialisation dans Kafka/Minio) : 20 %
 Mise en oeuvre technique (jobs Spark) : 40 %
 Analyse et conclusions : 30 %
 Qualité de la présentation : 10 %
-
-Bonus
+Bonus : ~+20%
