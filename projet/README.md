@@ -38,10 +38,9 @@ Optionnel au choix :
 - Relier vos requêtes de streaming à un dashboard (Le dashboard pourra s'alimenter auprès de n'importe quelle source)
 - Utiliser l'une des bases NoSQL présentée en tuto ou Neo4J au lieu de Minio (attention à choir une BD adaptée aux requêtes à effectuer et à la nature des données)
 
-## Critères d'évaluation approximatifs
+## Oral
 
-Collecte des données (script d'initialisation dans Kafka/Minio) : 20 %
-Mise en oeuvre technique (jobs Spark) : 40 %
-Analyse et conclusions : 30 %
-Qualité de la présentation : 10 %
-Bonus : ~+20%
+Temps total : 15 minutes
+
+1. Démo et explications sur l'API utilisée et les données extraites, leur signification, leur intérêt
+2. Montrer le code et le commenter (chacun commente une partie du code)
