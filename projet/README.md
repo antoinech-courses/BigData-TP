@@ -26,8 +26,8 @@ Attention aux limites d'utilisation (rate limit) : vérifiez bien celles de l'AP
 Les groupes devront être compter 4 élèves (sauf si nombre impaire dans la promo). Pour ceux qui sont en difficulté avec les installations (problème de mémoire ou de puissance de leur machine), veillez bien à vous inclure dans un groupe n'ayant pas de soucis à ce niveau.
 
 Vous devrez, à l'aide de Kafka (idéalement, Minio à défaut) et Apache Spark pour l'une des APIs mentionnées plus haut :
-- effectuer une requête en mode batch et présenter les résultats à l'aide de Pandas et Seaborn
-- effectuer des requêtes en mode streaming avec fenêtres temporelles
+- effectuer deux requêtes en mode batch et présenter les résultats à l'aide de Pandas et Seaborn
+- effectuer deux requêtes en mode streaming avec fenêtres temporelles
 
 Pour Minio, comme pour Kafka, une première étape sera d'insérer les données. Vous pouvez prendre comme modèle les scripts des TPs respectifs.
 
